@@ -10,6 +10,7 @@ class AlquilerRoutes {
     config() {
         this.router.get('/', alquilerControllers_1.alquilercontrollers.CargarTipoDocumento);
         this.router.get('/tecnologia', alquilerControllers_1.alquilercontrollers.CargarTipoTecnologia);
+        this.router.post('/', alquilerControllers_1.alquilercontrollers.GuardarClientes);
     }
 }
 const alquilerRoutes = new AlquilerRoutes();

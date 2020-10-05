@@ -11,6 +11,7 @@ class AlquilerRoutes{
   config():void{
       this.router.get('/',alquilercontrollers.CargarTipoDocumento)
       this.router.get('/tecnologia',alquilercontrollers.CargarTipoTecnologia)
+      this.router.post('/',alquilercontrollers.GuardarClientes)
   }
 }
 

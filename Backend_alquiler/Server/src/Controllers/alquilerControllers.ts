@@ -33,6 +33,16 @@ class AlquilerControllers {
     }
 
     public async GuardarClientes(req: Request, res: Response){
+        try {
+            await pool.query('INSERT INTO TblClientes set ?', [req.body])
+            console.log(req.body)
+            res.json({message: 'Clientes Guardados con exito'});
+            
+        }
+        catch (error) {
+            res.status(404).json({ error: 'No se pudieron almacenar datos'});
+        };
+      
         
     }
 }
