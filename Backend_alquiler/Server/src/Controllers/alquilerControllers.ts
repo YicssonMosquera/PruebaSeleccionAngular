@@ -45,6 +45,33 @@ class AlquilerControllers {
       
         
     }
+    public async GuardarAlquiler(req: Request, res: Response){
+        try {
+            await pool.query('INSERT INTO TblAlquiler set ?', [req.body])
+            console.log(req.body)
+            res.json({message: 'Clientes Guardados con exito'});
+            
+        }
+        catch (error) {
+            res.status(404).json({ error: 'No se pudieron almacenar datos'});
+        };
+      
+        
+    }
+    public async GuardarDetalleAlquiler(req: Request, res: Response){
+        try {
+            await pool.query('INSERT INTO TblDetalleAlquiler set ?', [req.body])
+            console.log(req.body)
+            res.json({message: 'Clientes Guardados con exito'});
+            
+        }
+        catch (error) {
+            res.status(404).json({ error: 'No se pudieron almacenar datos'});
+        };
+      
+        
+    }
+    
 }
 
 export const alquilercontrollers = new AlquilerControllers();
