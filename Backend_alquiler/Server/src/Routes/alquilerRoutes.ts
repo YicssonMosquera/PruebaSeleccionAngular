@@ -1,4 +1,5 @@
 import {Router} from 'express'
+import { alquilercontrollers } from '../Controllers/alquilerControllers'
 
 class AlquilerRoutes{
   public   router:Router = Router()
@@ -8,7 +9,8 @@ class AlquilerRoutes{
   }
 
   config():void{
-      this.router.get('/',(req,res)=>res.send('Alquiler'))
+      this.router.get('/',alquilercontrollers.CargarTipoDocumento)
+      this.router.get('/tecnologia',alquilercontrollers.CargarTipoTecnologia)
   }
 }
 
