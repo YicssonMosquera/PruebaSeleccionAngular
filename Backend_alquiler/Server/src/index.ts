@@ -6,7 +6,8 @@ class Server {
     
     constructor(){
       this.app =  express()
-        
+        this.config();
+        this.routes();
     }
 
     config(): void {
@@ -19,7 +20,9 @@ class Server {
 
     start():void {
         this.app.listen(this.app.get('port'))
+        console.log('server on port',this.app.get('port'))
     }
 }
 
-new Server()
+const server = new Server()
+server.start()
