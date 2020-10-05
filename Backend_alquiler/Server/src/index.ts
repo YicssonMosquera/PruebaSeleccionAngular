@@ -1,4 +1,8 @@
 import express, { Application } from 'express'
+import morgan from 'morgan';
+import cors from 'cors';
+import indexRoutes from './Routes/IndexRoutes';
+import alquilerRoutes from './Routes/alquilerRoutes'
 
 class Server {
     
@@ -12,10 +16,15 @@ class Server {
 
     config(): void {
         this.app.set('port',process.env.PORT || 3000)
+        this.app.use(morgan('dev'))
+        this.app.use(cors());
+        this.app.use(express.json());
+        this.app.use(express.urlencoded({extended:false}));
     }
 
     routes(): void {
-
+        this.app.use('/',indexRoutes)
+        this.app.use('/api/alquiler',alquilerRoutes)
     }
 
     start():void {
