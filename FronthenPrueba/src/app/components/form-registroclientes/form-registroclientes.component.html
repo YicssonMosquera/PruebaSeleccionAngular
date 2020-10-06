@@ -1,1 +1,43 @@
-<p>form-registroclientes works!</p>
+
+
+<div class="col-lg-4 mx-auto">
+    <div class="card">
+        <div class="card-header">
+            Registro Clientes
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <select id="documento" name="documento" [(ngModel)]="documento" class="form-control">
+                        <option value="">Seleccione tipo de documento</option>
+                        <option *ngFor='let clientes of clientes' [ngValue]="clientes.Descripcion"
+                            [ngValue]="clientes.PKId">{{clientes.Descripcion}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Clientes.PKIdentificacion" [(ngModel)]="Clientes.PKIdentificacion" class="form-control"
+                        placeholder="Digite su identificacion" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Clientes.Nombre_Completo" [(ngModel)]="Clientes.Nombre_Completo" id="" class="form-control"
+                        placeholder="Digite su nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Clientes.Telefono" [(ngModel)]="Clientes.Telefono" id="" class="form-control"
+                        placeholder="Digite su telefono" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Clientes.Direccion" [(ngModel)]="Clientes.Direccion" id="" class="form-control"
+                        placeholder="Digite su correo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="Clientes.Correo" [(ngModel)]="Clientes.Correo" id="" class="form-control"
+                        placeholder="Digite su direccion" required>
+                </div>
+
+
+                <button class="btn btn-primary btn-block" (click)=" GuardarClientes()"> Registrar</button>
+            </form>
+        </div>
+    </div>
+</div>

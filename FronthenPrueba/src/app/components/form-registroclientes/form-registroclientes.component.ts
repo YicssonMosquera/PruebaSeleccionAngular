@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ClientesService } from '../../services/clientes/clientes.service'
+import { Clientes } from '../../models/clientes'
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-form-registroclientes',
   templateUrl: './form-registroclientes.component.html',
@@ -7,9 +9,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormRegistroclientesComponent implements OnInit {
 
-  constructor() { }
+  clientes
+  documento = ''
 
-  ngOnInit(): void {
+  Clientes: Clientes = {
+    PKIdentificacion: '',
+    Nombre_Completo: '',
+    Telefono: '',
+    Direccion: '',
+    Correo: '',
+    FKId_TblTipodocumento: ''
   }
 
+
+  constructor(private clienteservice: ClientesService) { }
+
+  ngOnInit(): void {
+    this.getTipodocumento();
+
+  }
+  getTipodocumento() {
+    try {
+      this.clienteservice.GetTipodocumento().subscribe(res => {
+        this.clientes = res;
+      })
+    }
+    catch (error) {
+      console.log('no se pudieron cargar datos')
+    }
+
+  }
+
+  GuardarClientes() {
+    try {
+      console.log(this.documento)
+      this.Clientes.FKId_TblTipodocumento = this.documento
+      this.clienteservice.GuardarClientes(this.Clientes).subscribe(res => {
+        console.log(res)
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Cliente registrado con exito',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+    } catch (error) {
+      console.log('No se pudo registrar el cliente')
+    }
+  }
 }
