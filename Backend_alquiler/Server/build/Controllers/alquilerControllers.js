@@ -31,10 +31,11 @@ class AlquilerControllers {
             ;
         });
     }
-    CargarTipoTecnologia(req, res) {
+    CargarCliente(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { PKIdentificacion } = req.params;
             try {
-                const TipoTecnologia = yield database_1.default.query('SELECT * FROM TblTipoTecnologia', function (err, result, fields) {
+                const Clientes = yield database_1.default.query('SELECT * FROM TblClientes WHERE PKIdentificacion = ?', [PKIdentificacion], function (err, result, fields) {
                     if (err)
                         throw err;
                     res.json(result);

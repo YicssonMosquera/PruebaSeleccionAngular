@@ -1,0 +1,20 @@
+<div class="row justify-content-center align-items-center">
+    <div class="modal-header" style="width:100%">
+        <h4>Alquilar Peliculas</h4>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <td id="documento"><input type="text" class="form-control" placeholder="Digitar numero de documento" name="cliente"[(ngModel)]="cliente" id="identificacion"></td>
+            <td> <button class="btn btn-primary btn-block" (click)="Consultarcliente()">Consultar</button></td>
+        </div>
+       <strong *ngFor="let encontro of encontro">{{encontro.PKIdentificacion}} - {{encontro.Nombre_Completo}}</strong>
+    </div>
+
+    <div class="row">
+
+    </div>
+</div>
+

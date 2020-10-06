@@ -18,10 +18,10 @@ class AlquilerControllers {
         };
     }
 
-    public async CargarTipoTecnologia(req: Request, res: Response) {
+    public async CargarCliente(req: Request, res: Response) {
+        const {PKIdentificacion} = req.params
         try {
-            const TipoTecnologia = await pool.query('SELECT * FROM TblTipoTecnologia', function (err, result, fields) {
-
+            const Clientes = await pool.query('SELECT * FROM TblClientes WHERE PKIdentificacion = ?',[PKIdentificacion], function (err, result, fields) {
                 if (err) throw err;
                 res.json(result);
                 console.log(result)

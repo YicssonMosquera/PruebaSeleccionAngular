@@ -4,20 +4,23 @@ import { CommonModule } from "@angular/common";
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DataTablesModule } from 'angular-datatables';
 ////////////////////Componentes////////////////////
 import { AppComponent } from './app.component';
 import { FormRegistroclientesComponent } from './components/form-registroclientes/form-registroclientes.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 
 /////////////////// Servicios////////////7777
-import {ClientesService} from './services/clientes/clientes.service'
+import {ClientesService} from './services/clientes/clientes.service';
+import { AlquilerComponent } from './components/alquiler/alquiler.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FormRegistroclientesComponent,
-    NavigationComponent
+    NavigationComponent,
+    AlquilerComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import {ClientesService} from './services/clientes/clientes.service'
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ],
   providers: [
     FormsModule,
