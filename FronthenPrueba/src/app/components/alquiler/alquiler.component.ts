@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ClientesService } from '../../services/clientes/clientes.service'
 import { Router } from '@angular/router'
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {JuegosComponent} from '../juegos/juegos.component'
+import { JuegosComponent } from '../juegos/juegos.component'
+import { DataTableDirective } from 'angular-datatables';
+
+import { Subject, Observable } from 'rxjs';
+import { AlquilerService } from 'src/app/services/alquiler/alquiler.service';
 
 @Component({
   selector: 'app-alquiler',
@@ -13,12 +17,43 @@ import {JuegosComponent} from '../juegos/juegos.component'
 export class AlquilerComponent implements OnInit {
   cliente
   encontro
+  Juegonuevo = []
+  isReadonly = true;
+
+  dtOptions: DataTables.Settings = {};
+  dtTrigger = new Subject();
+  dtElement: DataTableDirective;
+
+@Input() Juegolocal;
+juegos$: Observable<any[]>;
+  
   constructor(private clienteservice: ClientesService, private Router: Router,
-    private modalService: NgbModal ) { }
+    private modalService: NgbModal, private alquilerservice: AlquilerService) { }
 
   ngOnInit(): void {
     this.Mensaje();
+    this.dtoptiontables();
+    this.Traerjuegos();
   }
+
+  Traerjuegos(){
+    this.juegos$ = this.alquilerservice.getJuegos$()
+    this.juegos$.subscribe(Juegolocal =>{
+      this.Juegolocal = Juegolocal
+      console.log(Juegolocal)
+      Array.prototype.push.apply(this.Juegonuevo, this.Juegolocal);
+    })
+  }
+
+  dtoptiontables(){
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+     pageLength: 10,
+     "lengthChange": false,
+      processing: false,
+    }
+  }
+
 
   Mensaje() {
     Swal.fire({
@@ -35,6 +70,7 @@ export class AlquilerComponent implements OnInit {
     try {
       this.clienteservice.GetClientes(this.cliente).subscribe(res => {
         this.encontro = res
+        this.isReadonly = false;
         console.log(this.encontro)
         if (this.encontro.length == 0) {
           Swal.fire({

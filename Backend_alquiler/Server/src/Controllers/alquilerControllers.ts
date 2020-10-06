@@ -71,7 +71,7 @@ class AlquilerControllers {
 
     public async CargarJuegos(req: Request, res: Response) {
         try {
-            const Juegos = await pool.query('SELECT *, "" as Cantidad FROM TblJuegos', function (err, result, fields) {
+            const Juegos = await pool.query('SELECT TblJuegos.PKid, TblJuegos.Nombre,  TblJuegos.Protagonistas,TblJuegos.Director,TblJuegos.Productor,TblJuegos.Marca,TblJuegos.Precio, TblJuegos.Ano, TblTipoTecnologia.Descripcion,  "" as Cantidad from TblJuegos,TblTipoTecnologia  WHERE TblTipoTecnologia.PKId = TblJuegos.FKId_TblTipoTecnologia', function (err, result, fields) {
                 if (err) throw err;
                 res.json(result);
                 console.log(result)

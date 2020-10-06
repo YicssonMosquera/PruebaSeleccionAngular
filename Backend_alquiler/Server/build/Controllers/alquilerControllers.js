@@ -90,7 +90,7 @@ class AlquilerControllers {
     CargarJuegos(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const Juegos = yield database_1.default.query('SELECT *, "" as Cantidad FROM TblJuegos', function (err, result, fields) {
+                const Juegos = yield database_1.default.query('SELECT TblJuegos.PKid, TblJuegos.Nombre,  TblJuegos.Protagonistas,TblJuegos.Director,TblJuegos.Productor,TblJuegos.Marca,TblJuegos.Precio, TblJuegos.Ano, TblTipoTecnologia.Descripcion,  "" as Cantidad from TblJuegos,TblTipoTecnologia  WHERE TblTipoTecnologia.PKId = TblJuegos.FKId_TblTipoTecnologia', function (err, result, fields) {
                     if (err)
                         throw err;
                     res.json(result);

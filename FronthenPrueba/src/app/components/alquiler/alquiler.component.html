@@ -6,22 +6,65 @@
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
-            <td id="documento"><input type="text" class="form-control" placeholder="Digitar numero de documento"
+        <div class="col-md-4">
+            <td id="documento"><input type="text" class="form-control" placeholder="Digitar No Identificacion"
                     name="cliente" [(ngModel)]="cliente" id="identificacion"></td>
             <td> <button class="btn btn-primary btn-block" (click)="Consultarcliente()">Consultar</button></td>
         </div>
-        <strong *ngFor="let encontro of encontro">{{encontro.PKIdentificacion}} - {{encontro.Nombre_Completo}}</strong>
+        <div class="col-md-3">
+            <strong *ngFor="let encontro of encontro">{{encontro.PKIdentificacion}} -
+                {{encontro.Nombre_Completo}}</strong>
+        </div>
+        <div class="col-md-5">
+            <button class="btn btn-primary" [disabled]="isReadonly" (click)="consultarJuegos()">Consultar juegos
+                disponibles</button>
+        </div>
+
     </div>
     <br>
+
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-primary" (click)="consultarJuegos()" >Consultar juegos disponibles</button>
+            <table class="table table-striped table-bordered table-sm row-border hover" datatable
+            [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                <thead>
+                    <tr>
+                        <th scope="col"> Nombre</th>
+                        <th scope="col"> Año</th>
+                        <th scope="col">Protagonistas</th>
+                        <th scope="col">Productor</th>
+                        <th scope="col">Director</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Tecn</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Juegos of Juegonuevo ">
+                        <td>{{Juegos.Nombre}}</td>
+                        <td>{{Juegos.Ano}}</td>
+                        <td>{{Juegos.Protagonistas}}</td>
+                        <td>{{Juegos.Productor}}</td>
+                        <td>{{Juegos.Director}}</td>
+                        <td>{{Juegos.Marca}}</td>
+                        <td>{{Juegos.Descripcion}}</td>
+                        <td>{{Juegos.Precio}}</td>
+                        <td>{{Juegos.Cantidad}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-
+        <div class="col-md-4">
+            <td><strong>Subtotal</strong></td>
+        </div>
+        <div class="col-md-4">
+            <td><strong>Iva</strong></td>
+        </div>
+        <div class="col-md-4">
+            <td><strong>Total</strong></td>
         </div>
     </div>
 </div>
