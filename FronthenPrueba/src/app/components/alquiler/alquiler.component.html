@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-bordered table-sm row-border hover" datatable
-            [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                 <thead>
                     <tr>
                         <th scope="col"> Nombre</th>
@@ -49,8 +49,10 @@
                         <td>{{Juegos.Director}}</td>
                         <td>{{Juegos.Marca}}</td>
                         <td>{{Juegos.Descripcion}}</td>
-                        <td>{{Juegos.Precio}}</td>
+                        <td>{{Juegos.Precio | number:'1.0-0'}}</td>
                         <td>{{Juegos.Cantidad}}</td>
+                        <td><button type="button" (click)="EliminarJuegos(Juegos.PKId)"
+                            class="btn btn-danger btn-circle">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -58,13 +60,21 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <td><strong>Subtotal</strong></td>
+            <td style="color: red"><strong id="subtotal">Subtotal:</strong>{{Subtotal | number:'1.0-0'}}<td>
         </div>
         <div class="col-md-4">
-            <td><strong>Iva</strong></td>
+            <td style="color: red"><strong id="Iva">Iva:</strong>{{Iva | number:'1.0-0'}}</td>
         </div>
         <div class="col-md-4">
-            <td><strong>Total</strong></td>
+            <td style="color: red"><strong id="Total">Total:</strong>{{Total | number:'1.0-0'}}</td>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            
+        </div>
+        <div class="col-md-6">
+            
         </div>
     </div>
 </div>

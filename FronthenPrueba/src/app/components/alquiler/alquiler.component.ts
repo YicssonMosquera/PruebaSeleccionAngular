@@ -5,9 +5,9 @@ import { Router } from '@angular/router'
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { JuegosComponent } from '../juegos/juegos.component'
 import { DataTableDirective } from 'angular-datatables';
-
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, interval } from 'rxjs';
 import { AlquilerService } from 'src/app/services/alquiler/alquiler.service';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-alquiler',
@@ -19,14 +19,18 @@ export class AlquilerComponent implements OnInit {
   encontro
   Juegonuevo = []
   isReadonly = true;
-
+  Total = 0
+  Subtotal = 0
+  Iva = 0
+  model: NgbDateStruct
+  
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   dtElement: DataTableDirective;
 
-@Input() Juegolocal;
-juegos$: Observable<any[]>;
-  
+  @Input() Juegolocal;
+  juegos$: Observable<any[]>;
+
   constructor(private clienteservice: ClientesService, private Router: Router,
     private modalService: NgbModal, private alquilerservice: AlquilerService) { }
 
@@ -34,22 +38,23 @@ juegos$: Observable<any[]>;
     this.Mensaje();
     this.dtoptiontables();
     this.Traerjuegos();
+    this.cargarTotal();
   }
 
-  Traerjuegos(){
+  Traerjuegos() {
     this.juegos$ = this.alquilerservice.getJuegos$()
-    this.juegos$.subscribe(Juegolocal =>{
+    this.juegos$.subscribe(Juegolocal => {
       this.Juegolocal = Juegolocal
       console.log(Juegolocal)
       Array.prototype.push.apply(this.Juegonuevo, this.Juegolocal);
     })
   }
 
-  dtoptiontables(){
+  dtoptiontables() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-     pageLength: 10,
-     "lengthChange": false,
+      pageLength: 10,
+      "lengthChange": false,
       processing: false,
     }
   }
@@ -96,6 +101,52 @@ juegos$: Observable<any[]>;
       this.handleModalsignUpClose.bind(this)
     )
   }
+
+  EliminarJuegos(PKId): void {
+    Swal.fire({
+      title: 'Desea eliminar este juego?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'aceptar'
+
+    }).then((result) => {
+      if (result.value) {
+        let index
+        for (let i = 0; i < this.Juegonuevo.length; i++) {
+          if (this.Juegonuevo[i].PKId === PKId) {
+            index = i;
+            this.Juegonuevo.splice(index, 1);
+            console.log('entro')
+          }
+        }
+      }
+    })
+  }
+  CalcularTotales() {
+    var p, c, iva, total = 0, subtotal = 0, ivatotal=0
+    for (let i = 0; i < this.Juegonuevo.length; i++) {
+      p = this.Juegonuevo[i].Precio
+      c = this.Juegonuevo[i].Cantidad
+      iva = 19/100
+      ivatotal = ivatotal + p * c  * iva
+      console.log(ivatotal)
+      subtotal = subtotal + p * c
+      total = total + p + c + ivatotal
+    }
+    this.Total = total
+    this.Subtotal = subtotal
+    this.Iva = ivatotal
+  }
+  cargarTotal() {
+    const cargar = interval(1000);
+    cargar.subscribe(() => {
+      this.CalcularTotales();
+    })
+  }
+
+
   handleModalsignUpClose() {
   }
 

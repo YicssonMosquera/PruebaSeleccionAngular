@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 ////////////////////Componentes////////////////////
 import { AppComponent } from './app.component';
 import { FormRegistroclientesComponent } from './components/form-registroclientes/form-registroclientes.component';
@@ -31,7 +32,8 @@ import { JuegosComponent } from './components/juegos/juegos.component'
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    DataTablesModule
+    DataTablesModule,
+    NgbModule,
   ],
   providers: [
     FormsModule,

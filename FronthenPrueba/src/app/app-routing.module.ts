@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {FormRegistroclientesComponent} from '../app/components/form-registroclientes/form-registroclientes.component'
 import {AlquilerComponent} from '../app/components/alquiler/alquiler.component'
 const routes: Routes = [
+  { path: '', redirectTo: '/Registro', pathMatch: 'full' },
   { path: 'Registro', component: FormRegistroclientesComponent },
   { path: 'Alquiler', component: AlquilerComponent},
 ];

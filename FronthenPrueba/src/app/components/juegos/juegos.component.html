@@ -30,7 +30,7 @@
                             <td>{{Juegos.Protagonistas}}</td>
                             <td>{{Juegos.Marca}}</td>
                             <td>{{Juegos.Descripcion}}</td>
-                            <td>{{Juegos.Precio}}</td>
+                            <td>{{Juegos.Precio | number:'1.0-0'}}</td>
                             <td><input type="number" name="Juegos.Cantidad" [(ngModel)]="Juegos.Cantidad" id="cantidad">
                             </td>
                         </tr>
