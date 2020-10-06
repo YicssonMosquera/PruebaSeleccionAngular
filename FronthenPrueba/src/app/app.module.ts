@@ -12,7 +12,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 
 /////////////////// Servicios////////////7777
 import {ClientesService} from './services/clientes/clientes.service';
-import { AlquilerComponent } from './components/alquiler/alquiler.component'
+import { AlquilerComponent } from './components/alquiler/alquiler.component';
+import { JuegosComponent } from './components/juegos/juegos.component'
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AlquilerComponent } from './components/alquiler/alquiler.component'
     AppComponent,
     FormRegistroclientesComponent,
     NavigationComponent,
-    AlquilerComponent
+    AlquilerComponent,
+    JuegosComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,9 @@ import { AlquilerComponent } from './components/alquiler/alquiler.component'
     FormsModule,
     ClientesService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    JuegosComponent
+  ]
 })
 export class AppModule { }

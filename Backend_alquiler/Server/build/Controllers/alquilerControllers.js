@@ -87,5 +87,21 @@ class AlquilerControllers {
             ;
         });
     }
+    CargarJuegos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const Juegos = yield database_1.default.query('SELECT *, "" as Cantidad FROM TblJuegos', function (err, result, fields) {
+                    if (err)
+                        throw err;
+                    res.json(result);
+                    console.log(result);
+                });
+            }
+            catch (error) {
+                res.status(404).json({ error: 'No se puedieron Datos' });
+            }
+            ;
+        });
+    }
 }
 exports.alquilercontrollers = new AlquilerControllers();

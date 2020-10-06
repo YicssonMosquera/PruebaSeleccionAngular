@@ -7,14 +7,21 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <td id="documento"><input type="text" class="form-control" placeholder="Digitar numero de documento" name="cliente"[(ngModel)]="cliente" id="identificacion"></td>
+            <td id="documento"><input type="text" class="form-control" placeholder="Digitar numero de documento"
+                    name="cliente" [(ngModel)]="cliente" id="identificacion"></td>
             <td> <button class="btn btn-primary btn-block" (click)="Consultarcliente()">Consultar</button></td>
         </div>
-       <strong *ngFor="let encontro of encontro">{{encontro.PKIdentificacion}} - {{encontro.Nombre_Completo}}</strong>
+        <strong *ngFor="let encontro of encontro">{{encontro.PKIdentificacion}} - {{encontro.Nombre_Completo}}</strong>
     </div>
-
+    <br>
     <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-primary" (click)="consultarJuegos()" >Consultar juegos disponibles</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
 
+        </div>
     </div>
 </div>
-

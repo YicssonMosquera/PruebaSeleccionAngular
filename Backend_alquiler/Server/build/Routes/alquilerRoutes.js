@@ -13,6 +13,7 @@ class AlquilerRoutes {
         this.router.post('/', alquilerControllers_1.alquilercontrollers.GuardarClientes);
         this.router.post('/alquiler', alquilerControllers_1.alquilercontrollers.GuardarAlquiler);
         this.router.post('/detalle', alquilerControllers_1.alquilercontrollers.GuardarDetalleAlquiler);
+        this.router.get('/juegos/juegos', alquilerControllers_1.alquilercontrollers.CargarJuegos);
     }
 }
 const alquilerRoutes = new AlquilerRoutes();

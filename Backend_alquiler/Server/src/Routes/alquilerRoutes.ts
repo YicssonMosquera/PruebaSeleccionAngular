@@ -14,7 +14,7 @@ class AlquilerRoutes{
       this.router.post('/',alquilercontrollers.GuardarClientes)
       this.router.post('/alquiler',alquilercontrollers.GuardarAlquiler)
       this.router.post('/detalle',alquilercontrollers.GuardarDetalleAlquiler)
-
+      this.router.get('/juegos/juegos',alquilercontrollers.CargarJuegos)
   }
 }
 
