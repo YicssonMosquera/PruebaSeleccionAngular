@@ -5,4 +5,5 @@ export interface Clientes{
     Direccion:string; 
     Correo:string;
     FKId_TblTipodocumento:string;
+    Edad:string;
 }

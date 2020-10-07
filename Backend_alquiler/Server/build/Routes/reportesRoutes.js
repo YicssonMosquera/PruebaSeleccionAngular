@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const ReportesControllers_1 = require("../Controllers/ReportesControllers");
+class ReportesRoutes {
+    constructor() {
+        this.router = express_1.Router();
+        this.config();
+    }
+    config() {
+        this.router.get('/', ReportesControllers_1.reportescontrollers.Ventasdeldia);
+    }
+}
+const reportesroutes = new ReportesRoutes();
+exports.default = reportesroutes.router;

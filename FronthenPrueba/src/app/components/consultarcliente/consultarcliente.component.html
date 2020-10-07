@@ -14,6 +14,7 @@
                         <tr>
                             <th scope="col">Identificacion</th>
                             <th scope="col">Nombre Completo</th>
+                            <th scope="col">Edad</th>
                             <th scope="col">Telefono</th>
                             <th scope="col">Correo</th>
                             <th scope="col">Direccion</th>
@@ -23,6 +24,7 @@
                         <tr *ngFor="let clientes of clientes ">
                             <td>{{clientes.PKIdentificacion}}</td>
                             <td>{{clientes.Nombre_Completo}}</td>
+                            <td>{{clientes.Edad}}</td>
                             <td>{{clientes.Telefono}}</td>
                             <td>{{clientes.Correo}}</td>
                             <td>{{clientes.Direccion}}</td>

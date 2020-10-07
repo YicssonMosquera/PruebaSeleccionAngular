@@ -16,7 +16,11 @@ import {ClientesService} from './services/clientes/clientes.service';
 import { AlquilerComponent } from './components/alquiler/alquiler.component';
 import { JuegosComponent } from './components/juegos/juegos.component';
 import { BienvenidoComponent } from './components/bienvenido/bienvenido.component';
-import { ConsultarclienteComponent } from './components/consultarcliente/consultarcliente.component'
+import { ConsultarclienteComponent } from './components/consultarcliente/consultarcliente.component';
+import { FiltroPipe } from './Pipe/filtro.pipe';
+import { VentasdiariaComponent } from './components/ventasdiaria/ventasdiaria.component';
+import { ClienteFrecuenteComponent } from './components/cliente-frecuente/cliente-frecuente.component';
+import { JuegorentadoComponent } from './components/juegorentado/juegorentado.component'
 
 
 @NgModule({
@@ -27,7 +31,11 @@ import { ConsultarclienteComponent } from './components/consultarcliente/consult
     AlquilerComponent,
     JuegosComponent,
     BienvenidoComponent,
-    ConsultarclienteComponent
+    ConsultarclienteComponent,
+    FiltroPipe,
+    VentasdiariaComponent,
+    ClienteFrecuenteComponent,
+    JuegorentadoComponent
   ],
   imports: [
     BrowserModule,

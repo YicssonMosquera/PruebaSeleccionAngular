@@ -3,7 +3,7 @@
         <h4>Alquilar Peliculas</h4>
         <input type="image" id="guardar" src="assets/img/anadir-al-carrito.png" width="50" height="50" class="mr-4"
             title="Consultar juegos" [disabled]="isReadonly" (click)="consultarJuegos()">
-        <button type="button" [disabled]="isReadonly" class="btn btn-info" id=" GuardarAlquiler()" (click)=" GuardarAlquiler()">Realizar alquiler</button>
+        <button type="button" [disabled]="isReadonly" class="btn btn-info" id="guardar" (click)=" GuardarAlquiler()">Realizar alquiler</button>
     </div>
 </div>
 <br>
@@ -20,8 +20,6 @@
             <strong *ngFor="let encontro of encontro">{{encontro.PKIdentificacion}} -
                 {{encontro.Nombre_Completo}}</strong>
         </div>
-        
-
     </div>
     <br>
     <div class="row">
@@ -69,6 +67,7 @@
                         <th scope="col">Tecn</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Cantidad</th>
+                        <th ></th>
                     </tr>
                 </thead>
                 <tbody>

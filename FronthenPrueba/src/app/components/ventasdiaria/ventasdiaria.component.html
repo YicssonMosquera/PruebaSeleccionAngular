@@ -1,0 +1,28 @@
+<div style="font-size: 0.9rem !important">
+    <div class="card-header">
+        <h3>
+            Listado de vetas por día
+        </h3>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md 12">
+                <table class="table table-striped table-bordered table-sm row-border hover" datatable
+                    [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th scope="col">Fecha</th>
+                            <th scope="col"> Total venta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Ventas of Ventas ">
+                            <td>{{Ventas.fecha}}</td>
+                            <td style="color: red">{{Ventas.Totalventa | number:'1.0-0'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

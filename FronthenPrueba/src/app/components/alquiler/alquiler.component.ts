@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ClientesService } from '../../services/clientes/clientes.service'
-import { Router } from '@angular/router'
+import { Router, NavigationEnd } from '@angular/router'
 import {NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { JuegosComponent } from '../juegos/juegos.component'
 import { DataTableDirective } from 'angular-datatables';
@@ -25,6 +25,9 @@ export class AlquilerComponent implements OnDestroy, OnInit {
   Total = 0
   Subtotal = 0
   Iva = 0
+  Totalproducto = 0
+  Subtotalproducto = 0
+  Ivaproducto = 0
   Fecha_entrega: NgbDateStruct
   Fecha_alquiler:  NgbDateStruct
   dtOptions: DataTables.Settings = {};
@@ -53,7 +56,16 @@ export class AlquilerComponent implements OnDestroy, OnInit {
   }
 
   constructor(private clienteservice: ClientesService, private Router: Router,
-    private modalService: NgbModal, private alquilerservice: AlquilerService) { }
+    private modalService: NgbModal, private alquilerservice: AlquilerService)
+     {this.Router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+     },
+      this.Router.events.subscribe((evt) => {
+    if (evt instanceof NavigationEnd) {
+        this.Router.navigated = false;
+        window.scrollTo(0, 0);
+    }
+  }); }
 
   ngOnInit(): void {
     this.Mensaje();
@@ -118,7 +130,7 @@ export class AlquilerComponent implements OnDestroy, OnInit {
   }
 
   consultarJuegos() {
-    const modal = this.modalService.open(JuegosComponent, { size: 'lg' })
+    const modal = this.modalService.open(JuegosComponent, { size: 'xl' })
     modal.result.then(
       this.handleModalsignUpClose.bind(this),
       this.handleModalsignUpClose.bind(this)
@@ -147,17 +159,22 @@ export class AlquilerComponent implements OnDestroy, OnInit {
       }
     })
   }
+ 
+  
   CalcularTotales() {
     var p, c, iva, total = 0, subtotal = 0, ivatotal=0
     for (let i = 0; i < this.Juegonuevo.length; i++) {
       p = this.Juegonuevo[i].Precio
       c = this.Juegonuevo[i].Cantidad
       iva = 19/100
+
       ivatotal = ivatotal + p * c  * iva
       console.log(ivatotal)
       subtotal = subtotal + p * c
-      total = total + p + c + ivatotal
+      total = total + subtotal + ivatotal
+      console.log(this.Subtotalproducto)
     }
+
     this.Total = total
     this.Subtotal = subtotal
     this.Iva = ivatotal
@@ -165,7 +182,7 @@ export class AlquilerComponent implements OnDestroy, OnInit {
   cargarTotal() {
     const cargar = interval(1000);
     cargar.subscribe(() => {
-      this.CalcularTotales();
+     this.CalcularTotales();
     })
   }
 
@@ -187,11 +204,12 @@ export class AlquilerComponent implements OnDestroy, OnInit {
   }
 
   GuardarDetallealquiler(){
-    console.log(this.Juegonuevo)
+    let iva = 19 /100
+    
     try{
       delete this.Detallealquiler.PKId;
       this.Codigo.forEach(element => {
-        this.Detallealquiler.FKId_TblAlquiler = element.PKId + 1;
+        this.Detallealquiler.FKId_TblAlquiler = element.PKId ;
       });
      
       this.Juegonuevo.forEach(element2 => {
@@ -201,10 +219,13 @@ export class AlquilerComponent implements OnDestroy, OnInit {
      
       this.Detallealquiler.Fecha_Alquiler = this.Fecha_alquiler.year + "-" + this.Fecha_alquiler.month + "-" + this.Fecha_alquiler.day
       this.Detallealquiler.Fecha_Fin_alquiler = this.Fecha_entrega.year + "-" + this.Fecha_entrega.month + "-" + this.Fecha_entrega.day
-      this.Detallealquiler.Subtotal = this.Subtotal;
-      this.Detallealquiler.Iva = this.Iva
-      this.Detallealquiler.Total = this.Total
-     this.alquilerservice.Guardardetallealquiler(this.Detallealquiler).subscribe(res=>{
+      const subtotal = (element2.Precio) * (element2.Cantidad)
+      const Iva = (element2.Precio) * (element2.Cantidad) * iva
+      const Total = subtotal + Iva
+      this.Detallealquiler.Subtotal = subtotal
+      this.Detallealquiler.Iva = Iva
+      this.Detallealquiler.Total = Total
+      this.alquilerservice.Guardardetallealquiler(this.Detallealquiler).subscribe(res=>{
         console.log(res)
       })
     })

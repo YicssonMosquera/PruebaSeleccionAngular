@@ -18,7 +18,8 @@ export class FormRegistroclientesComponent implements OnInit {
     Telefono: '',
     Direccion: '',
     Correo: '',
-    FKId_TblTipodocumento: ''
+    FKId_TblTipodocumento: '',
+    Edad: ''
   }
 
 
