@@ -53,6 +53,9 @@ export class FormRegistroclientesComponent implements OnInit {
           title: 'Cliente registrado con exito',
           showConfirmButton: false,
           timer: 1500
+        }).then((result) => {
+          if (result.value) 
+          {window.location.reload()}
         })
       })
     } catch (error) {

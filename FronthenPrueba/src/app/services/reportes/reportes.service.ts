@@ -14,4 +14,8 @@ export class ReportesService {
     return this.httpclient.get(`${this.API_URI}/`)
   }
 
+  Clientefrecuente() {
+    return this.httpclient.get(`${this.API_URI}/frecuente`)
+  }
+
 }

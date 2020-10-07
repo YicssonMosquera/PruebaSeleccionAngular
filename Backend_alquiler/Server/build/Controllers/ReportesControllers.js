@@ -31,5 +31,37 @@ class Reportescontrollers {
             ;
         });
     }
+    Clientefrecuente(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const ReporteVentas = yield database_1.default.query("SELECT C.PKIdentificacion,C.Nombre_Completo,B.maximo FROM (SELECT TblAlquiler.FKIdentificacion_TblClientes, COUNT(TblAlquiler.FKIdentificacion_TblClientes)as cuenta from TblAlquiler GROUP BY TblAlquiler.FKIdentificacion_TblClientes ) AS A INNER JOIN (select MAX(cuentatodos.cuenta) as maximo FROM (SELECT TblAlquiler.FKIdentificacion_TblClientes, COUNT(TblAlquiler.FKIdentificacion_TblClientes)as cuenta from TblAlquiler GROUP BY TblAlquiler.FKIdentificacion_TblClientes ) as cuentatodos) AS B ON A.cuenta=B.maximo INNER JOIN TblClientes AS C ON A.FKIdentificacion_TblClientes=C.PKIdentificacion ", function (err, result, fields) {
+                    if (err)
+                        throw err;
+                    res.json(result);
+                    console.log(result);
+                });
+            }
+            catch (error) {
+                res.status(404).json({ error: 'No se puedieron Datos' });
+            }
+            ;
+        });
+    }
+    juegorentable(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const ReporteVentas = yield database_1.default.query("SELECT C.Nombre,C.Ano, D.Descripcion, C.Marca,B.maximo FROM (SELECT TblDetalleAlquiler.FKid_TblJuegos, COUNT(TblDetalleAlquiler.FKid_TblJuegos)as cuenta from TblDetalleAlquiler GROUP BY TblDetalleAlquiler.FKid_TblJuegos ) AS A INNER JOIN (select MAX(cuentatodos.cuenta) as maximo FROM (SELECT TblDetalleAlquiler.FKid_TblJuegos, COUNT(TblDetalleAlquiler.FKid_TblJuegos)as cuenta from TblDetalleAlquiler GROUP BY TblDetalleAlquiler.FKid_TblJuegos ) as cuentatodos) AS B ON A.cuenta=B.maximo INNER JOIN TblJuegos AS C ON A.FKid_TblJuegos=C.PKid INNER JOIN TblTipoTecnologia as D ON C.FKId_TblTipoTecnologia = D.PKId ", function (err, result, fields) {
+                    if (err)
+                        throw err;
+                    res.json(result);
+                    console.log(result);
+                });
+            }
+            catch (error) {
+                res.status(404).json({ error: 'No se puedieron Datos' });
+            }
+            ;
+        });
+    }
 }
 exports.reportescontrollers = new Reportescontrollers();
