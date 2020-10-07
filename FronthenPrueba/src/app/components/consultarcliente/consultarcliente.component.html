@@ -1,0 +1,34 @@
+<div style="font-size: 0.9rem !important">
+    <div class="card-header">
+        <h3>
+            Listado de clientes
+        </h3>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md 12">
+                <table class="table table-striped table-bordered table-sm row-border hover" datatable
+                    [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th scope="col">Identificacion</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Direccion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let clientes of clientes ">
+                            <td>{{clientes.PKIdentificacion}}</td>
+                            <td>{{clientes.Nombre_completo}}</td>
+                            <td>{{clientes.Telefono}}</td>
+                            <td>{{clientes.Correo}}</td>
+                            <td>{{clientes.Direccion}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

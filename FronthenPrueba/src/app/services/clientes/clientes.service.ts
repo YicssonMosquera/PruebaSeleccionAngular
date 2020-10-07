@@ -22,4 +22,12 @@ export class ClientesService {
   GetClientes(PKIdentificacion) {
     return this.httpclient.get(`${this.API_URI}/${PKIdentificacion}`).pipe(map(data => data));
   }
+
+  ConsultarClientegeneral(){
+    return this.httpclient.get(`${this.API_URI}/Clientegeneral`)
+  }
+
+  Cargarcodigocliente(PKIdentificacion){
+    return this.httpclient.get(`${this.API_URI}/clientes/${PKIdentificacion}`).pipe(map(data => data));
+  }
 }

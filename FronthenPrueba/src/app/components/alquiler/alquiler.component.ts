@@ -2,12 +2,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ClientesService } from '../../services/clientes/clientes.service'
 import { Router } from '@angular/router'
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { JuegosComponent } from '../juegos/juegos.component'
 import { DataTableDirective } from 'angular-datatables';
-import { Subject, Observable, interval } from 'rxjs';
+import { Subject, Observable, interval, from } from 'rxjs';
 import { AlquilerService } from 'src/app/services/alquiler/alquiler.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {Alquiler} from '../../models/alquiler'
+import {Detallealquiler} from '../../models/detallealquiler'
+
 
 @Component({
   selector: 'app-alquiler',
@@ -30,6 +33,23 @@ export class AlquilerComponent implements OnInit {
 
   @Input() Juegolocal;
   juegos$: Observable<any[]>;
+
+  Alquiler:Alquiler = {
+    PKId: 0,
+    FKIdentificacion_TblClientes: '',
+    Fecha_Generacion:''
+  }
+  Detallealquiler:Detallealquiler ={
+    PKId: 0,
+    FKId_TblAlquiler: 0,
+    FKid_TblJuegos: 0,
+    Precio: 0,
+    Fecha_Alquiler:'',
+    Fecha_Fin_alquiler:'',
+    Subtotal:0,
+    Iva :0,
+    Total:0
+  }
 
   constructor(private clienteservice: ClientesService, private Router: Router,
     private modalService: NgbModal, private alquilerservice: AlquilerService) { }
@@ -146,6 +166,40 @@ export class AlquilerComponent implements OnInit {
     })
   }
 
+  GuardarAlquiler(){
+    try{
+      delete this.Alquiler.PKId;
+      delete this.Alquiler.Fecha_Generacion;
+      this.Alquiler.FKIdentificacion_TblClientes = this.encontro.PKIdentificacion
+      this.alquilerservice.GuardarAlquiler(this.Alquiler).subscribe(res=>{
+        console.log(res)
+      })
+
+    }catch(err){
+      console.log('no se puedieron almacenar datos')
+    }
+  }
+
+  GuardarDetallealquiler(){
+    try{
+      delete this.Detallealquiler.PKId;
+      delete this.Detallealquiler.Fecha_Alquiler;
+      this.Detallealquiler.FKId_TblAlquiler
+      this.Juegonuevo.forEach(element => {
+      this.Detallealquiler.FKid_TblJuegos = element.PKId;
+      this.Detallealquiler.Precio = element.Precio
+      })
+      this.Detallealquiler.Fecha_Fin_alquiler 
+      this.Detallealquiler.Subtotal = this.Subtotal;
+      this.Detallealquiler.Iva = this.Iva
+      this.Detallealquiler.Total = this.Total
+      this.alquilerservice.Guardardetallealquiler(this.Detallealquiler).subscribe(res=>{
+        console.log(res)
+      })
+    }catch(err){
+      console.log('no se pudieron almacenar los datos')
+    }
+  }
 
   handleModalsignUpClose() {
   }

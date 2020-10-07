@@ -15,7 +15,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import {ClientesService} from './services/clientes/clientes.service';
 import { AlquilerComponent } from './components/alquiler/alquiler.component';
 import { JuegosComponent } from './components/juegos/juegos.component';
-import { BienvenidoComponent } from './components/bienvenido/bienvenido.component'
+import { BienvenidoComponent } from './components/bienvenido/bienvenido.component';
+import { ConsultarclienteComponent } from './components/consultarcliente/consultarcliente.component'
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { BienvenidoComponent } from './components/bienvenido/bienvenido.componen
     NavigationComponent,
     AlquilerComponent,
     JuegosComponent,
-    BienvenidoComponent
+    BienvenidoComponent,
+    ConsultarclienteComponent
   ],
   imports: [
     BrowserModule,
