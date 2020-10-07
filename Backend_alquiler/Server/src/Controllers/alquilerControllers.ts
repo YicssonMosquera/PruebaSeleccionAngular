@@ -83,7 +83,6 @@ class AlquilerControllers {
     }
 
     public async CargarClienteGeneral(req: Request, res: Response) {
-        const { PKIdentificacion } = req.params
         try {
             const Clientes = await pool.query('SELECT * FROM TblClientes',  function (err, result, fields) {
                 if (err) throw err;

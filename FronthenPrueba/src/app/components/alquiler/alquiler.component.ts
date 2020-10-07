@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ClientesService } from '../../services/clientes/clientes.service'
 import { Router } from '@angular/router'
@@ -17,7 +17,7 @@ import {Detallealquiler} from '../../models/detallealquiler'
   templateUrl: './alquiler.component.html',
   styleUrls: ['./alquiler.component.css']
 })
-export class AlquilerComponent implements OnInit {
+export class AlquilerComponent implements OnDestroy, OnInit {
   cliente
   encontro
   Juegonuevo = []
@@ -25,14 +25,15 @@ export class AlquilerComponent implements OnInit {
   Total = 0
   Subtotal = 0
   Iva = 0
-  model: NgbDateStruct
-  
+  Fecha_entrega: NgbDateStruct
+  Fecha_alquiler:  NgbDateStruct
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   dtElement: DataTableDirective;
 
   @Input() Juegolocal;
   juegos$: Observable<any[]>;
+  Codigo
 
   Alquiler:Alquiler = {
     PKId: 0,
@@ -67,6 +68,7 @@ export class AlquilerComponent implements OnInit {
       this.Juegolocal = Juegolocal
       console.log(Juegolocal)
       Array.prototype.push.apply(this.Juegonuevo, this.Juegolocal);
+      this.dtTrigger.next();
     })
   }
 
@@ -97,6 +99,7 @@ export class AlquilerComponent implements OnInit {
         this.encontro = res
         this.isReadonly = false;
         console.log(this.encontro)
+        this.Cargarclientealquiler();
         if (this.encontro.length == 0) {
           Swal.fire({
             icon: 'error',
@@ -170,9 +173,12 @@ export class AlquilerComponent implements OnInit {
     try{
       delete this.Alquiler.PKId;
       delete this.Alquiler.Fecha_Generacion;
-      this.Alquiler.FKIdentificacion_TblClientes = this.encontro.PKIdentificacion
+      this.encontro.forEach(element => {
+        this.Alquiler.FKIdentificacion_TblClientes = element.PKIdentificacion
+      });
       this.alquilerservice.GuardarAlquiler(this.Alquiler).subscribe(res=>{
         console.log(res)
+        this.Cargarclientealquiler()
       })
 
     }catch(err){
@@ -181,27 +187,58 @@ export class AlquilerComponent implements OnInit {
   }
 
   GuardarDetallealquiler(){
+    console.log(this.Juegonuevo)
     try{
       delete this.Detallealquiler.PKId;
-      delete this.Detallealquiler.Fecha_Alquiler;
-      this.Detallealquiler.FKId_TblAlquiler
-      this.Juegonuevo.forEach(element => {
-      this.Detallealquiler.FKid_TblJuegos = element.PKId;
-      this.Detallealquiler.Precio = element.Precio
-      })
-      this.Detallealquiler.Fecha_Fin_alquiler 
+      this.Codigo.forEach(element => {
+        this.Detallealquiler.FKId_TblAlquiler = element.PKId + 1;
+      });
+     
+      this.Juegonuevo.forEach(element2 => {
+        console.log(this.Juegonuevo)
+      this.Detallealquiler.FKid_TblJuegos = element2.PKid;
+      this.Detallealquiler.Precio = element2.Precio
+     
+      this.Detallealquiler.Fecha_Alquiler = this.Fecha_alquiler.year + "-" + this.Fecha_alquiler.month + "-" + this.Fecha_alquiler.day
+      this.Detallealquiler.Fecha_Fin_alquiler = this.Fecha_entrega.year + "-" + this.Fecha_entrega.month + "-" + this.Fecha_entrega.day
       this.Detallealquiler.Subtotal = this.Subtotal;
       this.Detallealquiler.Iva = this.Iva
       this.Detallealquiler.Total = this.Total
-      this.alquilerservice.Guardardetallealquiler(this.Detallealquiler).subscribe(res=>{
+     this.alquilerservice.Guardardetallealquiler(this.Detallealquiler).subscribe(res=>{
         console.log(res)
       })
+    })
     }catch(err){
       console.log('no se pudieron almacenar los datos')
     }
   }
 
+
+  Cargarclientealquiler(){
+    console.log(this.encontro)
+    try{
+      this.encontro.forEach(element => {
+        this.clienteservice.Cargarcodigocliente(element.PKIdentificacion).subscribe(res=>{
+          this.Codigo = res
+          console.log(this.Codigo)
+          this.GuardarDetallealquiler()
+        })
+      });
+     
+    }catch(err){
+      console.log('No se encontro el codigo')
+    }
+   
+  }
+
   handleModalsignUpClose() {
   }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
+
+
 
 }

@@ -24,7 +24,7 @@ export class ClientesService {
   }
 
   ConsultarClientegeneral(){
-    return this.httpclient.get(`${this.API_URI}/Clientegeneral`)
+    return this.httpclient.get(`${this.API_URI}/cliente/Clientegeneral`)
   }
 
   Cargarcodigocliente(PKIdentificacion){

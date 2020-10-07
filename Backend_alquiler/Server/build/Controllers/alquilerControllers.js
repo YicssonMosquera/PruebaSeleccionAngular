@@ -103,5 +103,38 @@ class AlquilerControllers {
             ;
         });
     }
+    CargarClienteGeneral(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const Clientes = yield database_1.default.query('SELECT * FROM TblClientes', function (err, result, fields) {
+                    if (err)
+                        throw err;
+                    res.json(result);
+                    console.log(result);
+                });
+            }
+            catch (error) {
+                res.status(404).json({ error: 'No se puedieron Datos' });
+            }
+            ;
+        });
+    }
+    CargarCodigoalquiler(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { FKIdentificacion_TblClientes } = req.params;
+            try {
+                const Clientes = yield database_1.default.query('SELECT MAX(PKId) as PKId, FKIdentificacion_TblClientes FROM TblAlquiler WHERE FKIdentificacion_TblClientes  =?', [FKIdentificacion_TblClientes], function (err, result, fields) {
+                    if (err)
+                        throw err;
+                    res.json(result);
+                    console.log(result);
+                });
+            }
+            catch (error) {
+                res.status(404).json({ error: 'No se puedieron Datos' });
+            }
+            ;
+        });
+    }
 }
 exports.alquilercontrollers = new AlquilerControllers();
