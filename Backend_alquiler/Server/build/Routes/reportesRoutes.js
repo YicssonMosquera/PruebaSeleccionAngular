@@ -11,6 +11,8 @@ class ReportesRoutes {
         this.router.get('/', ReportesControllers_1.reportescontrollers.Ventasdeldia);
         this.router.get('/frecuente', ReportesControllers_1.reportescontrollers.Clientefrecuente);
         this.router.get('/jegosrestable', ReportesControllers_1.reportescontrollers.juegorentable);
+        this.router.get('/minimoedades', ReportesControllers_1.reportescontrollers.minimoporedades);
+        this.router.get('/:PKIdentificacion', ReportesControllers_1.reportescontrollers.CargarJuegosrentados);
     }
 }
 const reportesroutes = new ReportesRoutes();

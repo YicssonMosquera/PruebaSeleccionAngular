@@ -41,7 +41,30 @@ class Reportescontrollers {
     
     public async minimoporedades(req: Request, res: Response) {
         try {
-            const ReporteVentas = await pool.query(" ", function (err, result, fields) {
+            var query = "SELECT MIN(cuenta1020.cuenta) as minimo, cuenta1020.Nombre, 'edad entre 10 y 20 ' as rango "
+            query += "FROM (SELECT rango1020.PKId, rango1020.Nombre, COUNT(rango1020.PKId) as cuenta ";
+            query += "FROM (SELECT JU.PKid, JU.Nombre FROM TblClientes Cl INNER JOIN TblAlquiler Al ON Al.FKIdentificacion_TblClientes = Cl.PKIdentificacion ";
+            query += "INNER JOIN TblDetalleAlquiler Dt ON Dt.FKId_TblAlquiler = Al.PKId INNER JOIN TblJuegos JU ON JU.PKid = Dt.FKid_TblJuegos ";
+            query += "WHERE Cl.Edad Between 10 and 20 ) as rango1020 GROUP BY rango1020.PKId, rango1020.Nombre) as cuenta1020 ";
+            query += "UNION SELECT MIN(cuenta1020.cuenta) as minimo1020, cuenta1020.Nombre, 'edad entre 20 y 30 ' as rango ";
+            query += "FROM (SELECT rango1020.PKId, rango1020.Nombre, COUNT(rango1020.PKId) as cuenta ";
+            query += "FROM (SELECT JU.PKid, JU.Nombre FROM TblClientes Cl INNER JOIN TblAlquiler Al ON Al.FKIdentificacion_TblClientes = Cl.PKIdentificacion ";
+            query += "INNER JOIN TblDetalleAlquiler Dt ON Dt.FKId_TblAlquiler = Al.PKId INNER JOIN TblJuegos JU ON JU.PKid = Dt.FKid_TblJuegos ";
+            query += "WHERE Cl.Edad Between 20 and 30 ) as rango1020 GROUP BY rango1020.PKId, rango1020.Nombre) as cuenta1020 ";
+            const ReporteVentas = await pool.query(query, function (err, result, fields) {
+                if (err) throw err;
+                res.json(result);
+                console.log(result)
+            });
+        }
+        catch (error) {
+            res.status(404).json({ error: 'No se puedieron Datos' });
+        };
+    }
+    public async CargarJuegosrentados(req: Request, res: Response) {
+        const { PKIdentificacion } = req.params
+        try {
+            const Clientes = await pool.query("SELECT TblClientes.PKIdentificacion, TblClientes.Nombre_Completo, TblJuegos.Nombre, TblTipoTecnologia.Descripcion, TblDetalleAlquiler.Fecha_Alquiler FROM TblJuegos, TblAlquiler, TblDetalleAlquiler, TblClientes, TblTipoTecnologia WHERE TblClientes.PKIdentificacion = TblAlquiler.FKIdentificacion_TblClientes and TblAlquiler.PKId = TblDetalleAlquiler.FKId_TblAlquiler and TblJuegos.PKid = TblDetalleAlquiler.FKid_TblJuegos and TblTipoTecnologia.PKId = TblJuegos.FKId_TblTipoTecnologia and TblClientes.PKIdentificacion = ?", [PKIdentificacion], function (err, result, fields) {
                 if (err) throw err;
                 res.json(result);
                 console.log(result)

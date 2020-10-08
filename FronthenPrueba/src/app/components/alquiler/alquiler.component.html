@@ -1,6 +1,6 @@
 <div class="row justify-content-center align-items-center">
     <div class="modal-header" style="width:100%">
-        <strong><h1 id="fuente">Alquilar Peliculas</h1></strong>
+        <strong><h1 id="fuente">Alquilar juegos</h1></strong>
         <input type="image" id="guardar" src="assets/img/anadir-al-carrito.png" width="50" height="50" class="mr-4"
             title="Consultar juegos" [disabled]="isReadonly" (click)="consultarJuegos()">
             <button type="button" class="btn btn-secondary "  [disabled]="isReadonly"   id="guardar" kendo-button class="btn btn-secondary "  (click)="pdf.saveAs('Comprobante.pdf')"  (click)=" GuardarAlquiler()">Realizar alquiler</button>
@@ -70,8 +70,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped table-bordered table-sm row-border hover" datatable
-                    [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                <table class="table table-striped table-bordered table-sm row-border hover" >
                     <thead>
                         <tr>
                             <th scope="col"> Nombre</th>

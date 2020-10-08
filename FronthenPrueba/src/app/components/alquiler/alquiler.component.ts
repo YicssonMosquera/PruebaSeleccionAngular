@@ -30,9 +30,6 @@ export class AlquilerComponent implements OnDestroy, OnInit {
   Ivaproducto = 0
   Fecha_entrega: NgbDateStruct
   Fecha_alquiler:  NgbDateStruct
-  dtOptions: DataTables.Settings = {};
-  dtTrigger = new Subject();
-  dtElement: DataTableDirective;
 
   @Input() Juegolocal;
   juegos$: Observable<any[]>;
@@ -69,7 +66,6 @@ export class AlquilerComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.Mensaje();
-    this.dtoptiontables();
     this.Traerjuegos();
     this.cargarTotal();
   }
@@ -80,18 +76,10 @@ export class AlquilerComponent implements OnDestroy, OnInit {
       this.Juegolocal = Juegolocal
       console.log(Juegolocal)
       Array.prototype.push.apply(this.Juegonuevo, this.Juegolocal);
-      this.dtTrigger.next();
+      
     })
   }
 
-  dtoptiontables() {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      "lengthChange": false,
-      processing: false,
-    }
-  }
 
 
   Mensaje() {
@@ -171,7 +159,7 @@ export class AlquilerComponent implements OnDestroy, OnInit {
       ivatotal = ivatotal + p * c  * iva
       console.log(ivatotal)
       subtotal = subtotal + p * c
-      total = total + subtotal + ivatotal
+      total = subtotal + ivatotal
       console.log(this.Subtotalproducto)
     }
 
@@ -269,7 +257,7 @@ export class AlquilerComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
-    this.dtTrigger.unsubscribe();
+ 
   }
 
 

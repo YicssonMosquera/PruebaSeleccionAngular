@@ -7,6 +7,10 @@ import {ConsultarclienteComponent} from '../app/components/consultarcliente/cons
 import {VentasdiariaComponent} from '../app/components/ventasdiaria/ventasdiaria.component'
 import {ClienteFrecuenteComponent} from '../app/components/cliente-frecuente/cliente-frecuente.component'
 import {JuegorentadoComponent} from '../app/components/juegorentado/juegorentado.component'
+import {JmenosrentadosedadComponent} from './components/jmenosrentadosedad/jmenosrentadosedad.component'
+import {JuegosRentadosComponent} from './components/juegos-rentados/juegos-rentados.component'
+
+
 const routes: Routes = [
   { path: '', redirectTo: '/bienvenido', pathMatch: 'full' },
   { path: 'bienvenido', component: BienvenidoComponent },
@@ -16,6 +20,8 @@ const routes: Routes = [
   { path: 'Ventas-diarias', component: VentasdiariaComponent},
   { path: 'Client-frecuentado', component: ClienteFrecuenteComponent},
   { path: 'Juego-rentado', component: JuegorentadoComponent},
+  { path: 'Juego-meno-rentado', component: JmenosrentadosedadComponent},
+  { path: 'juegosalquilados', component: JuegosRentadosComponent},
 ];
 
 @NgModule({
