@@ -10,11 +10,13 @@ class AlquilerRoutes{
 
   config():void{
       this.router.get('/',alquilercontrollers.CargarTipoDocumento)
-      this.router.get('/tecnologia',alquilercontrollers.CargarTipoTecnologia)
+      this.router.get('/:PKIdentificacion',alquilercontrollers.CargarCliente)
       this.router.post('/',alquilercontrollers.GuardarClientes)
       this.router.post('/alquiler',alquilercontrollers.GuardarAlquiler)
       this.router.post('/detalle',alquilercontrollers.GuardarDetalleAlquiler)
-
+      this.router.get('/juegos/juegos',alquilercontrollers.CargarJuegos)
+      this.router.get('/cliente/Clientegeneral',alquilercontrollers.CargarClienteGeneral)
+      this.router.get('/clientes/:FKIdentificacion_TblClientes',alquilercontrollers.CargarCodigoalquiler)
   }
 }
 

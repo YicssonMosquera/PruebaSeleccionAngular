@@ -1,0 +1,26 @@
+#identificacion{
+    width: 300px;
+}
+
+
+#subtotal{
+    color: black;
+    margin-right: 10px;
+}
+#Total{
+    color: black;
+   
+    margin-right: 10px;
+}
+#Iva{
+    color: black;
+    margin-right: 10px;
+}
+
+#fechafin{
+    margin-right: 7000px;
+}
+
+#guardar{
+    float: right;
+}

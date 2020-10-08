@@ -1,0 +1,120 @@
+<div class="row justify-content-center align-items-center">
+    <div class="modal-header" style="width:100%">
+        <strong><h1 id="fuente">Alquilar juegos</h1></strong>
+        <input type="image" id="guardar" src="assets/img/anadir-al-carrito.png" width="50" height="50" class="mr-4"
+            title="Consultar juegos" [disabled]="isReadonly" (click)="consultarJuegos()">
+            <button type="button" class="btn btn-secondary "  [disabled]="isReadonly"   id="guardar" kendo-button class="btn btn-secondary "  (click)="pdf.saveAs('Comprobante.pdf')"  (click)=" GuardarAlquiler()">Realizar alquiler</button>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <td id="documento"><input type="text" class="form-control" placeholder="Digitar No Identificacion"
+                    name="cliente" [(ngModel)]="cliente" id="identificacion"></td>
+            <td> <button class="btn btn-secondary  btn-block" (click)="Consultarcliente()">Consultar</button></td>
+        </div>
+        <div class="col-md-2"></div>
+
+        <div class="col-md-5">
+
+        </div>
+    </div>
+    <br>
+
+    <kendo-pdf-export #pdf>
+    <div>
+        
+        <div class="row">
+            <div class="col-md-5">
+                <label *ngFor="let encontro of encontro">No. Identificacion: </label>
+                <strong *ngFor="let encontro of encontro">{{encontro.PKIdentificacion}} </strong>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <label *ngFor="let encontro of encontro">Nombre Completo: </label>
+                <strong *ngFor="let encontro of encontro">{{encontro.Nombre_Completo}}</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+
+                <div class="input-group">
+                    <div class="input-group-prepend" id="Agendar">
+                        <span class="input-group-text" id="">Fecha alquiler</span>
+                    </div>
+                    <input placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="Fecha_alquiler" ngbDatepicker
+                        [disabled]="isReadonly" #d="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" [disabled]="isReadonly" (click)="d.toggle()"
+                            type="button"><i class="far fa-calendar-alt fa-2x"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="input-group">
+                    <div class="input-group-prepend" id="Agendar">
+                        <span class="input-group-text" id="">Fecha entrega</span>
+                    </div>
+                    <input placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="Fecha_entrega" ngbDatepicker
+                        [disabled]="isReadonly" #d1="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" [disabled]="isReadonly" (click)="d1.toggle()"
+                            type="button"><i class="far fa-calendar-alt fa-2x"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-bordered table-sm row-border hover" >
+                    <thead>
+                        <tr>
+                            <th scope="col"> Nombre</th>
+                            <th scope="col"> Año</th>
+                            <th scope="col">Protagonistas</th>
+                            <th scope="col">Productor</th>
+                            <th scope="col">Director</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Tecn</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Juegos of Juegonuevo ">
+                            <td>{{Juegos.Nombre}}</td>
+                            <td>{{Juegos.Ano}}</td>
+                            <td>{{Juegos.Protagonistas}}</td>
+                            <td>{{Juegos.Productor}}</td>
+                            <td>{{Juegos.Director}}</td>
+                            <td>{{Juegos.Marca}}</td>
+                            <td>{{Juegos.Descripcion}}</td>
+                            <td>{{Juegos.Precio | number:'1.0-0'}}</td>
+                            <td>{{Juegos.Cantidad}}</td>
+                            <td><button type="button" (click)="EliminarJuegos(Juegos.PKId)"
+                                    class="btn btn-danger btn-circle">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <td style="color: red"><strong id="subtotal">Subtotal:</strong>{{Subtotal | number:'1.0-0'}}
+                <td>
+            </div>
+            <div class="col-md-4">
+                <td style="color: red"><strong id="Iva">Iva:</strong>{{Iva | number:'1.0-0'}}</td>
+            </div>
+            <div class="col-md-4">
+                <td style="color: red"><strong id="Total">Total:</strong>{{Total | number:'1.0-0'}}</td>
+            </div>
+        </div>
+    </div>
+</kendo-pdf-export>
+</div>

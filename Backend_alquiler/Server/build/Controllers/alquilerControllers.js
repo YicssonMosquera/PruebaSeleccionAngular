@@ -31,10 +31,11 @@ class AlquilerControllers {
             ;
         });
     }
-    CargarTipoTecnologia(req, res) {
+    CargarCliente(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { PKIdentificacion } = req.params;
             try {
-                const TipoTecnologia = yield database_1.default.query('SELECT * FROM TblTipoTecnologia', function (err, result, fields) {
+                const Clientes = yield database_1.default.query('SELECT * FROM TblClientes WHERE PKIdentificacion = ?', [PKIdentificacion], function (err, result, fields) {
                     if (err)
                         throw err;
                     res.json(result);
@@ -82,6 +83,55 @@ class AlquilerControllers {
             }
             catch (error) {
                 res.status(404).json({ error: 'No se pudieron almacenar datos' });
+            }
+            ;
+        });
+    }
+    CargarJuegos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const Juegos = yield database_1.default.query('SELECT TblJuegos.PKid, TblJuegos.Nombre,  TblJuegos.Protagonistas,TblJuegos.Director,TblJuegos.Productor,TblJuegos.Marca,TblJuegos.Precio, TblJuegos.Ano, TblTipoTecnologia.Descripcion,  "" as Cantidad from TblJuegos,TblTipoTecnologia  WHERE TblTipoTecnologia.PKId = TblJuegos.FKId_TblTipoTecnologia', function (err, result, fields) {
+                    if (err)
+                        throw err;
+                    res.json(result);
+                    console.log(result);
+                });
+            }
+            catch (error) {
+                res.status(404).json({ error: 'No se puedieron Datos' });
+            }
+            ;
+        });
+    }
+    CargarClienteGeneral(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const Clientes = yield database_1.default.query('SELECT * FROM TblClientes', function (err, result, fields) {
+                    if (err)
+                        throw err;
+                    res.json(result);
+                    console.log(result);
+                });
+            }
+            catch (error) {
+                res.status(404).json({ error: 'No se puedieron Datos' });
+            }
+            ;
+        });
+    }
+    CargarCodigoalquiler(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { FKIdentificacion_TblClientes } = req.params;
+            try {
+                const Clientes = yield database_1.default.query('SELECT MAX(PKId) as PKId, FKIdentificacion_TblClientes FROM TblAlquiler WHERE FKIdentificacion_TblClientes  =?', [FKIdentificacion_TblClientes], function (err, result, fields) {
+                    if (err)
+                        throw err;
+                    res.json(result);
+                    console.log(result);
+                });
+            }
+            catch (error) {
+                res.status(404).json({ error: 'No se puedieron Datos' });
             }
             ;
         });

@@ -1,0 +1,30 @@
+<div style="font-size: 0.9rem !important">
+    <div class="card-header">
+        <strong><h1 id="fuente">Juego mas rentable</h1></strong>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md 12">
+                <table class="table table-striped table-bordered table-sm row-border hover" datatable
+                    [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Año</th>
+                            <th scope="col">Tipo Tecnologia</th>
+                            <th scope="col">Marca</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Juegos of Juegos ">
+                            <td>{{Juegos.Nombre}}</td>
+                            <td>{{Juegos.Ano }}</td>
+                            <td>{{Juegos.Descripcion}}</td>
+                            <td>{{Juegos.Marca }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

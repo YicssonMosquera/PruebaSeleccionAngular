@@ -1,0 +1,56 @@
+<div style="font-size: 0.9rem !important">
+    <div class="card-header">
+       <strong> <h1 id="fuente">
+            Seleccionar Juegos
+            <button type="button" class="btn btn-danger" (click)="salir()" id="Juego">Cerrar</button>
+            <button type="button" class="btn btn-outline-success" (click)="AgregarJuegos()" id="Juego">Agregar</button>
+        </h1> </strong>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="text" id="buscar" class="form-control" name="filtrojuegos"
+                    placeholder="Digite Protagonistas Director Productor o Marca para buscar "
+                    [(ngModel)]="filtrojuegos">
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md 12">
+                <table class="table table-striped table-bordered table-sm row-border hover" datatable
+                    [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th scope="col"> Nombre</th>
+                            <th scope="col"> Año</th>
+                            <th scope="col">Protagonistas</th>
+                            <th scope="col">Productor</th>
+                            <th scope="col">Director</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Tecn</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Juegos of Juegos | filtro:filtrojuegos">
+                            <td>{{Juegos.Nombre}}</td>
+                            <td>{{Juegos.Ano}}</td>
+                            <td>{{Juegos.Protagonistas}}</td>
+                            <td>{{Juegos.Productor}}</td>
+                            <td>{{Juegos.Director}}</td>
+                            <td>{{Juegos.Marca}}</td>
+                            <td>{{Juegos.Descripcion}}</td>
+                            <td>{{Juegos.Precio | number:'1.0-0'}}</td>
+                            <td><input type="number" name="Juegos.Cantidad" [(ngModel)]="Juegos.Cantidad" id="cantidad">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
