@@ -11,7 +11,7 @@ class ReportesRoutes{
   config():void{
       this.router.get('/',reportescontrollers.Ventasdeldia);
       this.router.get('/frecuente',reportescontrollers.Clientefrecuente)
-      this.router.get('/jegosrestable',reportescontrollers.Clientefrecuente)
+      this.router.get('/jegosrestable',reportescontrollers.juegorentable)
   }
 }
 

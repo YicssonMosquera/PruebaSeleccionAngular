@@ -48,14 +48,16 @@ export class FormRegistroclientesComponent implements OnInit {
       this.clienteservice.GuardarClientes(this.Clientes).subscribe(res => {
         console.log(res)
         Swal.fire({
-          position: 'top-end',
+          title: 'Almacenado!',
+          text: 'Registro almacenado con exito',
           icon: 'success',
-          title: 'Cliente registrado con exito',
-          showConfirmButton: false,
-          timer: 1500
-        }).then((result) => {
-          if (result.value) 
-          {window.location.reload()}
+          allowOutsideClick: false
+        }
+
+        ).then((result) => {
+          if (result.value) {
+            window.location.reload()
+          }
         })
       })
     } catch (error) {

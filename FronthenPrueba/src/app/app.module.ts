@@ -21,6 +21,10 @@ import { FiltroPipe } from './Pipe/filtro.pipe';
 import { VentasdiariaComponent } from './components/ventasdiaria/ventasdiaria.component';
 import { ClienteFrecuenteComponent } from './components/cliente-frecuente/cliente-frecuente.component';
 import { JuegorentadoComponent } from './components/juegorentado/juegorentado.component'
+import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 
 @NgModule({
@@ -46,6 +50,8 @@ import { JuegorentadoComponent } from './components/juegorentado/juegorentado.co
     FormsModule,
     DataTablesModule,
     NgbModule,
+    PDFExportModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     FormsModule,

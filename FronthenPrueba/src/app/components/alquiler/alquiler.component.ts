@@ -227,6 +227,18 @@ export class AlquilerComponent implements OnDestroy, OnInit {
       this.Detallealquiler.Total = Total
       this.alquilerservice.Guardardetallealquiler(this.Detallealquiler).subscribe(res=>{
         console.log(res)
+        Swal.fire({
+          title: 'Almacenado!',
+          text: 'Registro almacenado con exito',
+          icon: 'success',
+          allowOutsideClick: false
+        }
+
+        ).then((result) => {
+          if (result.value) {
+            window.location.reload()
+          }
+        })
       })
     })
     }catch(err){

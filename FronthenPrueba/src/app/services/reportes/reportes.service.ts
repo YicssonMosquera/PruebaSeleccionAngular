@@ -18,4 +18,9 @@ export class ReportesService {
     return this.httpclient.get(`${this.API_URI}/frecuente`)
   }
 
+
+  Juegorentable() {
+    return this.httpclient.get(`${this.API_URI}/jegosrestable`)
+  }
+
 }

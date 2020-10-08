@@ -10,7 +10,7 @@ class ReportesRoutes {
     config() {
         this.router.get('/', ReportesControllers_1.reportescontrollers.Ventasdeldia);
         this.router.get('/frecuente', ReportesControllers_1.reportescontrollers.Clientefrecuente);
-        this.router.get('/jegosrestable', ReportesControllers_1.reportescontrollers.Clientefrecuente);
+        this.router.get('/jegosrestable', ReportesControllers_1.reportescontrollers.juegorentable);
     }
 }
 const reportesroutes = new ReportesRoutes();
