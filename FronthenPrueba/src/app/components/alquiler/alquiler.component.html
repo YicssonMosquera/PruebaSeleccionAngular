@@ -1,9 +1,9 @@
 <div class="row justify-content-center align-items-center">
     <div class="modal-header" style="width:100%">
-        <h4>Alquilar Peliculas</h4>
+        <strong><h1 id="fuente">Alquilar Peliculas</h1></strong>
         <input type="image" id="guardar" src="assets/img/anadir-al-carrito.png" width="50" height="50" class="mr-4"
             title="Consultar juegos" [disabled]="isReadonly" (click)="consultarJuegos()">
-            <button type="button" class="btn btn-info"  [disabled]="isReadonly"   id="guardar" kendo-button class="btn btn-info"  (click)="pdf.saveAs('Comprobante.pdf')"  (click)=" GuardarAlquiler()">Realizar alquiler</button>
+            <button type="button" class="btn btn-secondary "  [disabled]="isReadonly"   id="guardar" kendo-button class="btn btn-secondary "  (click)="pdf.saveAs('Comprobante.pdf')"  (click)=" GuardarAlquiler()">Realizar alquiler</button>
     </div>
 </div>
 <br>
@@ -12,7 +12,7 @@
         <div class="col-md-5">
             <td id="documento"><input type="text" class="form-control" placeholder="Digitar No Identificacion"
                     name="cliente" [(ngModel)]="cliente" id="identificacion"></td>
-            <td> <button class="btn btn-info btn-block" (click)="Consultarcliente()">Consultar</button></td>
+            <td> <button class="btn btn-secondary  btn-block" (click)="Consultarcliente()">Consultar</button></td>
         </div>
         <div class="col-md-2"></div>
 

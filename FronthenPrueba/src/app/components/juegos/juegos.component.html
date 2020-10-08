@@ -1,12 +1,23 @@
 <div style="font-size: 0.9rem !important">
     <div class="card-header">
-        <h3>
+       <strong> <h1 id="fuente">
             Seleccionar Juegos
             <button type="button" class="btn btn-danger" (click)="salir()" id="Juego">Cerrar</button>
             <button type="button" class="btn btn-outline-success" (click)="AgregarJuegos()" id="Juego">Agregar</button>
-        </h3>
+        </h1> </strong>
     </div>
     <br>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="text" id="buscar" class="form-control" name="filtrojuegos"
+                    placeholder="Digite Protagonistas Director Productor o Marca para buscar "
+                    [(ngModel)]="filtrojuegos">
+            </div>
+        </div>
+    </div>
+    <br>
+
     <div class="container">
         <div class="row">
             <div class="col-md 12">
@@ -26,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let Juegos of juegos ">
+                        <tr *ngFor="let Juegos of Juegos | filtro:filtrojuegos">
                             <td>{{Juegos.Nombre}}</td>
                             <td>{{Juegos.Ano}}</td>
                             <td>{{Juegos.Protagonistas}}</td>

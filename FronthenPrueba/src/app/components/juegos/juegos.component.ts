@@ -17,6 +17,8 @@ dtElement: DataTableDirective;
 Juegos 
 Juegolocal =[]
 
+filtrojuegos=''
+
 constructor(private alquilerservice: AlquilerService, public activeModal: NgbActiveModal,) { }
 
  
@@ -37,7 +39,7 @@ constructor(private alquilerservice: AlquilerService, public activeModal: NgbAct
   ConsultarJuegos() {
     try {
       this.alquilerservice.CargarJuegos().subscribe(res => {
-        this.juegos = res
+        this.Juegos = res
         this.dtTrigger.next();
       })
     } catch (err) {
@@ -50,10 +52,10 @@ constructor(private alquilerservice: AlquilerService, public activeModal: NgbAct
   }
 
   AgregarJuegos(){
-    this.juegos.forEach(element => {
+    this.Juegos.forEach(element => {
       if(element.Cantidad > 0){
-        this.Juegos = element
-        this.Juegolocal.push(this.Juegos)
+        this.juegos = element
+        this.Juegolocal.push(this.juegos)
         console.log(this.Juegolocal)
       }
     });
